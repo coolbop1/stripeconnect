@@ -13,8 +13,7 @@ const authcode = searchParams.get("code");
     // TODO: use axios
     fetch(`https://connect.stripe.com/oauth/token`, {
       method: "POST",
-      headers: new Headers(),
-      mode: "no-cors",
+      headers : new Headers({"Content-Type": "application/json; charset=UTF-8"}),
       body:JSON.stringify({
         client_secret:  "sk_test_r0yJQToZ9epfi2Kqc6hh64EL",
         code: authcode,
