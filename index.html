@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+const parsedUrl = new URL(window.location.href);
+const { searchParams } = parsedUrl;
+const authcode = searchParams.get("code"); 
+        const connectStripe = () => {
+    // TODO: use axios
+    fetch(`https://connect.stripe.com/oauth/token`, {
+      method: "POST",
+      headers: new Headers(),
+      mode: "no-cors",
+      body:JSON.stringify({
+        client_secret:  "sk_test_r0yJQToZ9epfi2Kqc6hh64EL",
+        code: authcode,
+        grant_type: "authorization_code"
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        const { stripe_user_id } = data;
+        if (!stripe_user_id) {
+            //this.error();
+            console.log(data)
+        }else{
+           // this.handleStripeID(stripe_user_id);
+           console(stripe_user_id)
+        }
+      })
+      .catch(errors => {
+        //this.error();
+        console.log(errors);
+      });
+  };
+  connectStripe();
+    </script>
+</head>
+<body>
+  <h1>
+    HIIII
+  </h1>
+    
+</body>
+</html>
